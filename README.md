@@ -101,6 +101,7 @@ def web_scraping():
 * Generar un reporte **[AL FINAL]**
 * Se deben invocar archivos **BASH** desde python **[ESPECIFICO]**
 * Se debe crear un scrip principal **[ESPECIFICO]**
+* Crear los HASH de todos los archivos **[GLOBAL]**
 
 **NOTA:** _Todas las funcionalidades del script deben funcionar en linux y windows_
 
