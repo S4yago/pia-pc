@@ -54,7 +54,7 @@ def guardar_informacion(datosEncontrados):
     for clave, valor in datosEncontrados.items():
         if isinstance(valor, list):
             dic = valor[0]
-            data(dic)
+            guardar_informacion(dic)
         else:
             headers.append(clave)
             values.append(valor)
