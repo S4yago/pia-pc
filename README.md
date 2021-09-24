@@ -101,9 +101,40 @@ def web_scraping():
 * Generar un reporte **[AL FINAL]**
 * Se deben invocar archivos **BASH** desde python **[ESPECIFICO]**
 * Se debe crear un scrip principal **[ESPECIFICO]**
+* Crear los HASH de todos los archivos **[GLOBAL]**
 
 **NOTA:** _Todas las funcionalidades del script deben funcionar en linux y windows_
 
+## Git y GitHub
+Vamos a utilizar [Conventional Commits][commits] para darle sentido a nuestro commits.
+Eso sí, no vamos a seguirla al pie de la letra.
+
+### Conventional commits estructura
+
+```bash
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+* fix: Se arreglo un _bug_
+* feat: Se agrego una nueva característica
+* docs: Se cambio la documentación
+* perf: Un cambio de código que mejora el rendimiento
+* refactor: Un cambio de código que no corrige un error ni agrega una característica
+* style: cambios que no afectan el significado del código (espacios en blanco, formato, punto y coma que faltan, etc.)
+
+**Ejemplo:**
+```bash
+feat: crea un archivo .xlsx con los datos
+
+utilzando los datos guardados por la funcion X
+
+se agregó una nueva función que utliza los datos
+
+para crear un libro de excel.
+```
 [pep8]:https://www.python.org/dev/peps/pep-0008/
 [errores1]:https://docs.python.org/es/3/tutorial/errors.html
 [errores2]:https://www.youtube.com/watch?v=IYB2q4sgzvw
@@ -112,3 +143,4 @@ def web_scraping():
 [argparse3]:https://www.youtube.com/watch?v=SbQmQ4T4E8E
 [socket1]:https://docs.python.org/3.9/howto/sockets.html
 [socket2]:https://programmerclick.com/article/546769496/
+[commits]:https://www.conventionalcommits.org/en/v1.0.0/
