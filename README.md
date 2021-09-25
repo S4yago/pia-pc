@@ -26,7 +26,7 @@
 **Ejemplo:**
 ```python
 ### Nombre del script: web_scraping.py
-#!/bin/python3
+#!/usr/bin/env python3
 
 from pyhunter import PyHunter
 from openpyxl import Workbook
@@ -54,7 +54,7 @@ def guardar_informacion(datosEncontrados):
     for clave, valor in datosEncontrados.items():
         if isinstance(valor, list):
             dic = valor[0]
-            data(dic)
+            guardar_informacion(dic)
         else:
             headers.append(clave)
             values.append(valor)
@@ -92,6 +92,7 @@ def web_scraping():
     1. [Documentación Oficial][argparse1]
     2. [Documentación externa][argparse2]
     2. [Video de Youtube][argparse3]
+    2. [Video de Youtube 2][argparse4]
 * Uso de `socket` **[ESPECIFICO]**
     1. [Documentación Oficial][socket1]
     2. [Documentación externa][socket2]
@@ -141,6 +142,7 @@ para crear un libro de excel.
 [argparse1]:https://docs.python.org/es/3.8/howto/argparse.html
 [argparse2]:https://rico-schmidt.name/pymotw-3/argparse/#:~:text=argparse%20es%20una%20herramienta%20completa,maneja%20argumentos%20opcionales%20y%20requeridos.
 [argparse3]:https://www.youtube.com/watch?v=SbQmQ4T4E8E
+[argparse4]:https://www.youtube.com/watch?v=tirLko5urBo&t=228s
 [socket1]:https://docs.python.org/3.9/howto/sockets.html
 [socket2]:https://programmerclick.com/article/546769496/
 [commits]:https://www.conventionalcommits.org/en/v1.0.0/
