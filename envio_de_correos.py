@@ -66,3 +66,17 @@ def main():
         print("\n\tUsuario o contraseña no validos :c")
         exit()
 
+
+# Abre el archivo txt y retorna los "emails", el "subject" y el "body".
+def extract_data(arg_txt):
+    with open(arg_txt, "r") as em:
+        line_emails = em.readlines()[0].replace('\n', '')
+        emails = line_emails.split(",") # Se guarda en una lista
+        em.seek(0) # Vuelve al inicio del archivo
+        line_subject = em.readlines()[1].replace('\n', '')
+        em.seek(0)
+        line_body = em.readlines()[3:]
+        formatted_body = "".join(line_body)
+        form(emails, line_subject, formatted_body)
+
+
