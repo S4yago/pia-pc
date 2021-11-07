@@ -126,4 +126,13 @@ def send_message(receiver_emails, text):
         print("\n\tCorreo enviado exitosamente, bye! uwu")
 
 
-
+if __name__ == "__main__":
+    if params.credentials and params.email or params.file != None:
+        open_json()
+        main()
+        extract_data()
+    else:
+        arg_json, arg_txt, arg_file = menu()
+        open_json(arg_json)
+        main()
+        extract_data(arg_txt)
