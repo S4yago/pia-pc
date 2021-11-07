@@ -35,3 +35,21 @@ def open_json(arg_json):
         global password
         user = data["user"]
         password = data["pass"]
+
+
+def menu():
+    r = attr(0)
+    print("%s+-----------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %sIngresa el path del archivo .json%s       %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+-----------------------------------------------+%s" % (fg(1), r))
+    arg_json = input("%s-->%s " % (fg(30), r))
+    print("%s+-----------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %sIngresa el path del archivo .txt%s        %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+-----------------------------------------------+%s" % (fg(1), r))
+    arg_txt = input("%s-->%s " % (fg(30), r))
+    print("%s+---------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %sIngresa el path del archivo a adjuntar%s      %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+---------------------------------------------------+%s" % (fg(1), r))
+    arg_file = input("%s-->%s " % (fg(30), r))
+    return arg_json, arg_txt, arg_file
+
