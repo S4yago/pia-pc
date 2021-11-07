@@ -80,3 +80,40 @@ def extract_data(arg_txt):
         form(emails, line_subject, formatted_body)
 
 
+def form(emails, line_subject, line_body):
+    subject = line_subject
+    body = line_body
+    file = arg_file
+    receiver_emails = ", ".join(emails)
+
+    # Se crea el objeto, y se declaran los headers
+    message = MIMEMultipart() 
+    message["From"] = user
+    message["To"] = receiver_emails
+    message["Subject"] = subject
+
+    message.attach(MIMEText(body, "plain")) # Se añade el contenido del mensaje
+
+    if arg_file is not None:
+        filename = file  
+
+        with open(filename, "rb") as attachment: # Se abre el archivo en bytes owo
+
+            part = MIMEBase("application", "octet-stream") # Se añade el archivo como application/octet-stream
+            part.set_payload(attachment.read())
+
+        encoders.encode_base64(part) # Se codifica en ascii lo que se enviará
+
+        # Se le añade un header al archivo
+        part.add_header( 
+            "Content-Disposition",
+            f"attachment; filename= {filename}",
+        )
+
+        # Se añade el archivo al mensaje y se hace cadena
+        message.attach(part)
+
+    text = message.as_string()
+    send_message(receiver_emails, text)
+
+
