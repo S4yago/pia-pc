@@ -22,3 +22,16 @@ parser.add_argument("-j", dest="credentials", type=str, help="Path absoluto del 
 parser.add_argument("-e", dest="email", type=str, help="Path absoluto del archivo .txt", required=False)
 parser.add_argument("-f", dest="file", type=str, help="Path absoluto del archivo a adjuntar", required=False)
 params = parser.parse_args()
+
+arg_json = params.credentials
+arg_txt = params.email
+arg_file = params.file
+
+def open_json(arg_json):
+    data = {}
+    with open(arg_json) as cred:
+        data = json.load(cred)
+        global user
+        global password
+        user = data["user"]
+        password = data["pass"]
