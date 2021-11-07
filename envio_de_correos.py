@@ -117,3 +117,13 @@ def form(emails, line_subject, line_body):
     send_message(receiver_emails, text)
 
 
+def send_message(receiver_emails, text):
+    # Nos logeamos y mandamos el mensaje
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+        server.login(user, password)
+        server.sendmail(user, receiver_emails, text)
+        print("\n\tCorreo enviado exitosamente, bye! uwu")
+
+
+
