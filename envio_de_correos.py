@@ -53,3 +53,16 @@ def menu():
     arg_file = input("%s-->%s " % (fg(30), r))
     return arg_json, arg_txt, arg_file
 
+
+def main():
+    smtp = smtplib.SMTP('smtp.gmail.com', 587)
+    smtp.ehlo()
+    smtp.starttls()
+ 
+    try:
+        smtp.login(user, password)
+        print("\n\tConexión exitosa c:")
+    except:
+        print("\n\tUsuario o contraseña no validos :c")
+        exit()
+
