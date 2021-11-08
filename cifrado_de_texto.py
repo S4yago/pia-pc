@@ -68,3 +68,15 @@ def removeNonLetters(message):
         if symbol in LETTERS_AND_SPACE:
             lettersOnly.append(symbol)
     return ''.join(lettersOnly)
+    
+
+def isSpanish(message, wordPercentage=30, letterPercentage=85):
+    # Por default, el 30% de las palabras deben existir en el diccionario, y
+    # 85% de todos los caracteres en el mensaje deben ser letras o espacios
+    # (no signos de puntuacion o numeros).
+    
+    wordsMatch = getSpanishCount(message) * 100 >= wordPercentage
+    numLetters = len(removeNonLetters(message))
+    messageLettersPercentage = float(numLetters) / len(message) * 100
+    lettersMatch = messageLettersPercentage >= letterPercentage
+    return wordsMatch and lettersMatch
