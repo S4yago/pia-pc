@@ -61,3 +61,10 @@ def getSpanishCount(message):
             matches += 1
     return float(matches) / len(possibleWords) # El porcentaje
 
+
+def removeNonLetters(message):
+    lettersOnly = []
+    for symbol in message:
+        if symbol in LETTERS_AND_SPACE:
+            lettersOnly.append(symbol)
+    return ''.join(lettersOnly)
