@@ -181,3 +181,14 @@ def cesar_crack():
             if isSpanish(clave):
                 
                 print("La posible traducción es: \n",clave)
+
+
+def trans_decode():
+ 
+    with open (params.file) as arch:
+        texto = arch.read()
+
+    key = len_key()
+    finaltxt = decryptMessage(key, texto)
+
+    print("El mensaje decodificado es: \n", finaltxt + '|') # Se imprime un |, para indicar el final del mensaje
