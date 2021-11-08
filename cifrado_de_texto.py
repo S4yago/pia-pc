@@ -80,3 +80,16 @@ def isSpanish(message, wordPercentage=30, letterPercentage=85):
     messageLettersPercentage = float(numLetters) / len(message) * 100
     lettersMatch = messageLettersPercentage >= letterPercentage
     return wordsMatch and lettersMatch
+    
+
+def len_key():
+    espacios = 1
+    if params.key == None: 
+        key = 5
+    else:
+        while espacios > 0:
+            espacios = params.key.count(' ')
+            if params.key.isalpha() == False:
+                espacios += 1
+        key = len(params.key)
+    return key
