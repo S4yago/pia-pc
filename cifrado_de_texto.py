@@ -46,3 +46,18 @@ def loadDictionary(language='es'):
     return words
 
 WORDS = loadDictionary(params.language)
+
+def getSpanishCount(message):
+    message = message.upper()
+    message = removeNonLetters(message)
+    possibleWords = message.split() # Divide un str por cada ' '
+
+    if possibleWords == []:
+        return 0.0 # No words at all, so return 0.0.
+
+    matches = 0
+    for word in possibleWords:
+        if word in WORDS:
+            matches += 1
+    return float(matches) / len(possibleWords) # El porcentaje
+
