@@ -148,3 +148,36 @@ def cesar_decode_and_encode():
             translated = translated + symbol
 
     print("Mensaje decodificado:\n" + translated)
+
+
+def cesar_crack():
+
+    with open (params.file) as arch:
+        texto = arch.read()
+
+    SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.,_-()/\#$%&=*'
+
+    # Loop through every possible key:
+    for key in range(len(SYMBOLS)):
+
+        lista = []
+
+        translated = ''
+        for symbol in texto:
+            if symbol in SYMBOLS:
+                symbolIndex = SYMBOLS.find(symbol)
+                translatedIndex = symbolIndex - key
+
+                if translatedIndex < 0:
+                    translatedIndex = translatedIndex + len(SYMBOLS)
+
+                translated = translated + SYMBOLS[translatedIndex]
+            else:
+                translated = translated + symbol
+        lista.append(translated)
+
+        #Validacion de cadenas en español
+        for clave in lista:
+            if isSpanish(clave):
+                
+                print("La posible traducción es: \n",clave)
