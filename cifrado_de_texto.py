@@ -5,7 +5,7 @@ import argparse
 import math 
 
 description =""" Modo de uso 😃:
-    cifrado_de_texto.py -m "Metodo" -f "Funcion" [-k][Default=5] "Clave"
+    cifrado_de_texto.py [-l] "Idioma" -m "Metodo" -f "Funcion" [-k][Default=5] "Clave" -a "Archivo.txt"
     
     """
 
