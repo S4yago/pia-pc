@@ -29,3 +29,6 @@ parser.add_argument("-k", dest="key", help=msj2, required=False)
 parser.add_argument("-a", dest="file", help="Path absoluto del archivo .txt a codificar", required=True)
 
 params = parser.parse_args()
+
+UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 
+LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
