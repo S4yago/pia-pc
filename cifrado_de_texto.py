@@ -32,3 +32,17 @@ params = parser.parse_args()
 
 UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 
 LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
+
+def loadDictionary(language='es'):
+    if language == 'es':
+        dictionaryFile = open('dictEsp.txt',encoding='utf-8')
+    else:
+        dictionaryFile = open('dictEn.txt',encoding='utf-8')
+    words = {}
+    for word in dictionaryFile.read().split('\n'):
+        word = word.upper()
+        words[word] = None
+    dictionaryFile.close()
+    return words
+
+WORDS = loadDictionary(params.language)
