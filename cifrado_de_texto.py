@@ -93,3 +93,24 @@ def len_key():
                 espacios += 1
         key = len(params.key)
     return key
+
+
+def decryptMessage(key, message):
+
+    numOfColumns = int(math.ceil(len(message) / float(key)))      # Numero de columnas de la matriz
+    numOfRows = key        # Numero de filas de la matriz 
+    numOfShadedBoxes = (numOfColumns * numOfRows) - len(message)  # Numero de casillas sin usar  
+    plaintext = [''] * numOfColumns
+
+    column = 0
+    row = 0
+    for symbol in message:
+        plaintext[column] += symbol
+        column += 1                                             
+
+        if (column == numOfColumns) or (column == numOfColumns - 1 and row >= numOfRows - numOfShadedBoxes):
+            column = 0
+            row += 1
+
+    finaltxt = ''.join(plaintext)
+    return finaltxt
