@@ -242,3 +242,20 @@ def trans_crack():
                 
     else:
         print('Failed to hack encryption.')
+
+
+if __name__ == '__main__':
+
+    if params.metodo == 'cesar':
+        if params.function == 'encode' or params.function == 'decode':
+            cesar_decode_and_encode()
+        elif params.function == 'crack':
+            cesar_crack()
+
+    elif params.metodo == 'transposicion':
+        if params.function == 'encode':
+            trans_encode()
+        elif params.function == 'decode':
+            trans_decode()
+        elif params.function == 'crack':
+            trans_crack()
