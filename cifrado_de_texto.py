@@ -212,3 +212,33 @@ def trans_encode():
 
     finaltxt = ''.join(ciphertext)
     print("El mensaje codificado es: \n", finaltxt + '|')
+
+
+def trans_crack(): 
+    
+    with open (params.file) as arch:
+        message = arch.read()
+    
+    if message != None:
+        print('(Press Ctrl-C or Ctrl-D to quit at any time.)')
+
+        # Brute-force by looping through every possible key.
+        for key in range(1, len(message)):
+            print('Trying key #%s...' % (key))
+
+            decryptedText = decryptMessage(key, message)
+            if isSpanish(decryptedText):
+                # Ask user if this is the correct decryption.
+                print()
+                print('Possible encryption hack:')
+                print('Key %s: %s' % (key, decryptedText[:100]))
+                print()
+                print("NOTA: Si no estás satisfecho con el resultado... Revise la flag '-l' 😉")
+                print('Enter D if done, anything else to continue hacking:')
+                response = input('> ')
+
+                if response.strip().upper().startswith('D'):
+                    exit()
+                
+    else:
+        print('Failed to hack encryption.')
