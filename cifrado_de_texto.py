@@ -192,3 +192,23 @@ def trans_decode():
     finaltxt = decryptMessage(key, texto)
 
     print("El mensaje decodificado es: \n", finaltxt + '|') # Se imprime un |, para indicar el final del mensaje
+
+
+def trans_encode():
+
+    with open (params.file) as arch:
+        texto = arch.read()
+
+    key = len_key()
+    ciphertext = [''] * key
+
+    for column in range(key):
+        currentIndex = column
+
+        while currentIndex < len(texto):
+
+            ciphertext[column] += texto[currentIndex]
+            currentIndex += key
+
+    finaltxt = ''.join(ciphertext)
+    print("El mensaje codificado es: \n", finaltxt + '|')
