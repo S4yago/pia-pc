@@ -114,3 +114,37 @@ def decryptMessage(key, message):
 
     finaltxt = ''.join(plaintext)
     return finaltxt
+
+
+def cesar_decode_and_encode():
+
+    with open (params.file) as arch:
+        texto = arch.read()
+
+    key = len_key()
+
+    SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.,_-()/\#$%&=*'
+
+    translated = ''
+
+    for symbol in texto:
+        # Note: Only symbols in the `SYMBOLS` string can be encrypted/decrypted.
+        if symbol in SYMBOLS:
+            symbolIndex = SYMBOLS.find(symbol)
+
+            if params.function == 'decode':
+                translatedIndex = symbolIndex - key
+            else:
+                translatedIndex = symbolIndex + key
+
+            if translatedIndex >= len(SYMBOLS):
+                translatedIndex = translatedIndex - len(SYMBOLS)
+            elif translatedIndex < 0:
+                translatedIndex = translatedIndex + len(SYMBOLS)
+
+            translated = translated + SYMBOLS[translatedIndex]
+        else:
+            # Append the symbol without encrypting/decrypting:
+            translated = translated + symbol
+
+    print("Mensaje decodificado:\n" + translated)
