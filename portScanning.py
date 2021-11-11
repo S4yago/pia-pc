@@ -1,7 +1,9 @@
 import socket
+from socket import *
 import colorama
 from colorama import Fore
 import threading
+from threading import *
 
 colorama.init()
 
@@ -19,3 +21,17 @@ def connscan(tgtHost, tgtPort):
         print (Fore.WHITE + f"[{tgtPort}]" + Fore.RED + "Cerrado")
     finally:
         scanner.close()
+
+def portscanner(tgtHost, tgtPorts):
+    try:
+        tgtIP = gethostbyname(tgtHost)
+    except:
+        print ("Unknown Host %s " % tgtHost)
+    try:
+        tgtName = gethostbyaddr(tgtIP)
+        print ("[+] Escaneando: ") + tgtName[0]
+    except:
+        print ("Resultados del escaneo a: " + tgtIP)
+    for tgtPort in tgtPorts:
+        t = Thread(target=connscan, args=(tgtHost, int(tgtPort)))
+        t.start()
