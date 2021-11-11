@@ -35,3 +35,14 @@ def portscanner(tgtHost, tgtPorts):
     for tgtPort in tgtPorts:
         t = Thread(target=connscan, args=(tgtHost, int(tgtPort)))
         t.start()
+
+def scan(tgtHost, tgtPorts):
+    scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    scanner.settimeout(1)
+    try:
+        scanner.connect((tgtHost, tgtPorts))
+        scanner.close()
+        with print_lock:
+            print(Fore.WHITE + f"[{tgtPorts}]" + Fore.GREEN + "Abierto")
+    except:
+        pass
