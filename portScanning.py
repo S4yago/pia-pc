@@ -1,13 +1,13 @@
-import socket
-from socket import *
-import colorama
-from colorama import Fore
-import threading
-from threading import *
-import time
-import concurrent.futures
-import os
 import argparse
+import colorama
+from socket import *
+import socket
+from threading import *
+import threading
+import time
+import os
+import concurrent.futures
+from colorama import Fore
 
 colorama.init()
 
