@@ -7,6 +7,7 @@ from threading import *
 import time
 import concurrent.futures
 import os
+import argparse
 
 colorama.init()
 
@@ -121,3 +122,34 @@ def menu():
             print("""No haz seleccionado una opcion correcta, introduce
                   la opcion que deseas del 1 al 3... \npulsa una tecla
                   para continuar""")
+
+def main():
+    parser = argparse.ArgumentParser(description="""Para usar esta
+                                     herramienta usar: '
+                                     '-H(Host Objetivo) '
+                                     '-p(Primer Puerto Objetivo), '
+                                     '(Segundo Puerto Objetivo), ..., '
+                                     '(N Puerto Objetivo) """)
+    parser.add_argument('-H', dest="tgtHost", type=str,
+                        help='Indicar el host objetivo')
+    parser.add_argument('-p', dest="tgtPort", type=str,
+                        help='Indicar el puerto objetivo')
+    args = parser.parse_args()
+    tgtHost = args.tgtHost
+    tgtPorts = str(args.tgtPort).split(',')
+
+    if args.tgtHost is not None and args.tgtPort is not None:
+        portscanner(tgtHost, tgtPorts)
+    elif args.tgtHost is not None and args.tgtPort is not None:
+        tgtPorts = args.tgtPort
+        print ("[+] Escaneando... ")
+        with concurrent.futures.ThreadPoolExecutor(
+                                                   max_workers=100
+                                                   ) as executor:
+            for tgtPorts in range(1000):
+                executor.submit(scan, tgtHost, tgtPorts + 1)
+    elif args.tgtHost is None and args.tgtPort is None:
+        menu()
+
+if __name__ == '__main__':
+    main()
