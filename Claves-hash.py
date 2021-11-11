@@ -93,3 +93,53 @@ def menu():
             print("%s%sHasta la próxima!%s" % (fg(3), attr(4), r))
             break
 
+
+def md5():
+    direccion = []
+    dir = args.direccion
+    direccion.append(dir)
+    with open('directions.txt', 'a') as file:
+        for item in direccion:
+            file.write("%s\n" % item)
+
+    with open('directions.txt', 'rb') as fr:
+        byte = fr.read()
+        f = open("directions.txt", "r")
+        lines = f.readlines()
+        for linea in lines:
+            if args.modo == 'md5':
+                md5 = hashlib.md5()
+                md5.update(byte)
+                x = PrettyTable()
+                x.field_names = ["Hash", "File", "Clave hash"]
+                x.add_row(["md5", linea, "{}".format(md5.hexdigest())])
+                f = open('results-md5.txt', 'a')
+                f.write("%s\n" % str(x))
+                f.close()
+                print(linea, 'hashing...')
+                print('Completed!')
+
+            if args.modo == 'sha256':
+                sha256 = hashlib.sha256()
+                sha256.update(byte)
+                y = PrettyTable()
+                y.field_names = ["Hash", "File", "Clave hash"]
+                y.add_row(["sha256", linea, "{}".format(sha256.hexdigest())])
+                f = open('results-sha256.txt', 'a')
+                f.write("%s\n" % str(y))
+                f.close()
+                print(linea, 'hashing...')
+                print('Completed!')
+
+            if args.modo == 'sha512':
+                sha512 = hashlib.sha512()
+                sha512.update(byte)
+                z = PrettyTable()
+                z.field_names = ["Hash", "File", "Clave hash"]
+                z.add_row(["sha512", linea, "{}".format(sha512.hexdigest())])
+                f = open('results-sha512.txt', 'a')
+                f.write("%s\n" % str(z))
+                f.close()
+                print(linea, 'hashing...')
+                print('Completed!')
+
