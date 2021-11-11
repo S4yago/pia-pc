@@ -13,6 +13,7 @@ colorama.init()
 
 print_lock = threading.Lock()
 
+
 def connscan(tgtHost, tgtPort):
     scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     scanner.settimeout(1)
@@ -25,6 +26,7 @@ def connscan(tgtHost, tgtPort):
         print (Fore.WHITE + f"[{tgtPort}]" + Fore.RED + "Cerrado")
     finally:
         scanner.close()
+
 
 def portscanner(tgtHost, tgtPorts):
     try:
@@ -40,6 +42,7 @@ def portscanner(tgtHost, tgtPorts):
         t = Thread(target=connscan, args=(tgtHost, int(tgtPort)))
         t.start()
 
+
 def scan(tgtHost, tgtPorts):
     scanner = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     scanner.settimeout(1)
@@ -50,6 +53,7 @@ def scan(tgtHost, tgtPorts):
             print(Fore.WHITE + f"[{tgtPorts}]" + Fore.GREEN + "Abierto")
     except:
         pass
+
 
 def menu():
     salir = False
@@ -122,6 +126,7 @@ def menu():
             print("""No haz seleccionado una opcion correcta, introduce
                   la opcion que deseas del 1 al 3... \npulsa una tecla
                   para continuar""")
+
 
 def main():
     parser = argparse.ArgumentParser(description="""Para usar esta
