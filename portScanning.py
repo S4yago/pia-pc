@@ -4,6 +4,9 @@ import colorama
 from colorama import Fore
 import threading
 from threading import *
+import time
+import concurrent.futures
+import os
 
 colorama.init()
 
@@ -46,3 +49,75 @@ def scan(tgtHost, tgtPorts):
             print(Fore.WHITE + f"[{tgtPorts}]" + Fore.GREEN + "Abierto")
     except:
         pass
+
+def menu():
+    salir = False
+    opcion = 0
+
+    while not salir:
+        print(Fore.RED +
+              "+------------------------------------------------------+")
+        print(Fore.RED +
+              "|" +
+              Fore.WHITE +
+              "                         MENU                         " +
+              Fore.RED + "|")
+        print(Fore.RED +
+              "+------------------------------------------------------+")
+        print(Fore.RED +
+              "|" +
+              Fore.WHITE +
+              "    1. Escanear todos los puertos abiertos al Host    " +
+              Fore.RED + "|")
+        print(Fore.RED +
+              "|" +
+              Fore.WHITE +
+              "    2. Escanear puertos especificos del Host          " +
+              Fore.RED + "|")
+        print(Fore.RED +
+              "|" + Fore.WHITE +
+              "    3. Salir                                          " +
+              Fore.RED + "|")
+        print(Fore.RED +
+              "+------------------------------------------------------+" +
+              Fore.RESET)
+        opcion = input("Selecciona una opcion: ")
+        os.system("cls")
+
+        if opcion == "1":
+            print(Fore.RED +
+                  "+------------------------------------------------------+")
+            print(Fore.RED + "|" +
+                  Fore.WHITE +
+                  "     Escanear todos los puertos abiertos al Host      " +
+                  Fore.RED + "|")
+            print(Fore.RED +
+                  "+------------------------------------------------------+" +
+                  Fore.RESET)
+            ip = input("Ingresa la ip a escanear: ")
+            tgtPorts = 0
+            print ("[+] Escaneando... ")
+            with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+                for tgtPorts in range(1000):
+                    executor.submit(scan, ip, tgtPorts + 1)
+        elif opcion == "2":
+            print(Fore.RED +
+                  "+------------------------------------------------------+")
+            print(Fore.RED +
+                  "|" + Fore.WHITE +
+                  "        Escanear puertos especificos del Host         " +
+                  Fore.RED + "|")
+            print(Fore.RED +
+                  "+------------------------------------------------------+" +
+                  Fore.RESET)
+            ip = input("Ingresa la ip a escanear: ")
+            port = input("Ingresa el puerto a escanear: ")
+            portscanner(ip, str(port).split(','))
+            time.sleep(5)
+        elif opcion == "3":
+            print("Nos vemos!")
+            salir = True
+        else:
+            print("""No haz seleccionado una opcion correcta, introduce
+                  la opcion que deseas del 1 al 3... \npulsa una tecla
+                  para continuar""")
