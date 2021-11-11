@@ -143,3 +143,34 @@ def md5():
                 print(linea, 'hashing...')
                 print('Completed!')
 
+if __name__ == '__main__':
+    description = (
+        "El objetivo de este script es la obtención de claves hash" +
+        "donde podrás ingresar tus direcciones en un txt y posteriormente," +
+        "se genera un txt con las claves en el tipo de hasheo que haya" +
+        "indicado dentro del menú")
+    parser = argparse.ArgumentParser(description="PIA de Ciberseguridad",
+                                     epilog=description,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('-modo',
+                        metavar='MODO',
+                        dest='modo',
+                        choices=['md5', 'sha256', 'sha512'],
+                        help="Si desea obtener la clave hash," +
+                        "es necesario especificar que tipo")
+    parser.add_argument("-direccion",
+                        metavar='DIRECCION',
+                        dest='direccion',
+                        type=str,
+                        help="Se debe poner una dirección de" +
+                        "archivo existente dentro del sistema")
+    args = parser.parse_args()
+if args.modo is None:
+    menu()
+if args.modo == 'md5':
+    md5()
+elif args.modo == 'sha256':
+    md5()
+elif args.modo == 'sha512':
+    md5()
+    
