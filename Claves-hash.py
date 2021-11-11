@@ -89,7 +89,7 @@ def menu():
                     if (hashop == 4):
                         break
                 f.close()
-        if (opcion == 3):
+        if (opcion == 2):
             print("%s%sHasta la próxima!%s" % (fg(3), attr(4), r))
             break
 
