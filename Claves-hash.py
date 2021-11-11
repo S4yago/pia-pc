@@ -93,8 +93,3 @@ def menu():
             print("%s%sHasta la próxima!%s" % (fg(3), attr(4), r))
             break
 
-
-def direction():
-    with open('direcciones.txt', 'r') as file2:
-        for linea in file2:
-            return linea
