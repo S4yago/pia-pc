@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import envio_de_correos, cifrado_de_texto, claves_hash, port_scanning, api_github
-import argparse, sys
+import argparse, time, os
 
 
 msj2= "Clave para la codificación o decodificación. Default = 5"
@@ -66,13 +66,20 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
 
-    if args.mode.lower() == 'email':
+    if args.mode == 'email':
         envio_de_correos.main(args.email_json, args.email_txt, args.email_file)
-    elif args.mode.lower() == 'encryption':
+    elif args.mode == 'encryption':
         cifrado_de_texto.main(args.language, args.metodo, args.function, args.key, args.file)
-    elif args.mode.lower() == 'hash':
+    elif args.mode == 'hash':
         claves_hash.main(args.hash, args.cifrado)
-    elif args.mode.lower() == 'scan':
+    elif args.mode == 'scan':
         port_scanning.main(args.host, args.port)
-    elif args.mode.lower() == 'api':
+    elif args.mode == 'api':
         api_github.run_script(args.user, args.repo, args.token)
+    elif args.mode == None:
+        print("[+] No se ha especificado ningun metodo...")
+        time.sleep(1.5)
+        print("[+] Ejecutando menu...")
+        time.sleep(1.5)
+        os.system("clear")
+
