@@ -1,4 +1,3 @@
-import argparse
 import colorama
 from socket import *
 import socket
@@ -21,9 +20,9 @@ def connscan(tgtHost, tgtPort):
         scanner.connect((tgtHost, tgtPort))
         scanner.close()
         with print_lock:
-            print(Fore.WHITE + f"[{tgtPort}]" + Fore.GREEN + "Abierto")
+            print(Fore.WHITE + f"[{tgtPort}]" + Fore.GREEN + " Abierto")
     except:
-        print (Fore.WHITE + f"[{tgtPort}]" + Fore.RED + "Cerrado")
+        print (Fore.WHITE + f"[{tgtPort}]" + Fore.RED + " Cerrado")
     finally:
         scanner.close()
 
@@ -50,7 +49,7 @@ def scan(tgtHost, tgtPorts):
         scanner.connect((tgtHost, tgtPorts))
         scanner.close()
         with print_lock:
-            print(Fore.WHITE + f"[{tgtPorts}]" + Fore.GREEN + "Abierto")
+            print(Fore.WHITE + f"[{tgtPorts}]" + Fore.GREEN + " Abierto")
     except:
         pass
 
@@ -128,33 +127,20 @@ def menu():
                   para continuar""")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="""Para usar esta
-                                     herramienta usar: '
-                                     '-H(Host Objetivo) '
-                                     '-p(Primer Puerto Objetivo), '
-                                     '(Segundo Puerto Objetivo), ..., '
-                                     '(N Puerto Objetivo) """)
-    parser.add_argument('-H', dest="tgtHost", type=str,
-                        help='Indicar el host objetivo')
-    parser.add_argument('-p', dest="tgtPort", type=str,
-                        help='Indicar el puerto objetivo')
-    args = parser.parse_args()
-    tgtHost = args.tgtHost
-    tgtPorts = str(args.tgtPort).split(',')
+def main(arg1, arg2):
 
-    if args.tgtHost is not None and args.tgtPort is not None:
+    tgtHost = arg1
+    tgtPorts = str(arg2).split(',')
+
+    if arg1 is not None and arg2 is not None:
         portscanner(tgtHost, tgtPorts)
-    elif args.tgtHost is not None and args.tgtPort is not None:
-        tgtPorts = args.tgtPort
+    elif arg1 is not None and arg2 is None:
+        tgtPorts = arg2
         print ("[+] Escaneando... ")
         with concurrent.futures.ThreadPoolExecutor(
                                                    max_workers=100
                                                    ) as executor:
             for tgtPorts in range(1000):
                 executor.submit(scan, tgtHost, tgtPorts + 1)
-    elif args.tgtHost is None and args.tgtPort is None:
+    elif arg1 is None and arg2 is None:
         menu()
-
-if __name__ == '__main__':
-    main()

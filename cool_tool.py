@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-import envio_de_correos, cifrado_de_texto, claves_hash
-import argparse
+import envio_de_correos, cifrado_de_texto, claves_hash, port_scanning, api_github
+import argparse, sys
 
 
 msj2= "Clave para la codificación o decodificación. Default = 5"
@@ -9,8 +9,8 @@ parser = argparse.ArgumentParser()
 
 # Metodo
 parser.add_argument('-m',
-                    type=str, dest="mode", choices=['email', 'encryption', 'hash'],
-                    required=True,
+                    type=str, dest="mode", choices=['email', 'encryption', 'hash', 'scan', 'api'],
+                    required=False,
                     help='metodo')
 
 # Emails
@@ -47,6 +47,20 @@ parser.add_argument("--cifrado",
                     help="Se debe poner una dirección de" +
                     "archivo existente dentro del sistema")
 
+# Port Scanning
+parser.add_argument('--host', dest="host", type=str,
+                    help='Indicar el host objetivo')
+parser.add_argument('--port', dest="port", type=str,
+                    help='Indicar el puerto objetivo')
+
+# API GitHub
+parser.add_argument('--user', dest="user", type=str,
+                    help='Ingresar el usuario de GitHub')
+parser.add_argument('--repository', dest="repo", type=str,
+                    help='Ingresar el nombre del repositorio')
+parser.add_argument('--token', dest="token", type=str,
+                    help='Ingresar el token OAuth de GitHub')
+
 args = parser.parse_args()
 
 
@@ -58,12 +72,7 @@ if __name__ == "__main__":
         cifrado_de_texto.main(args.language, args.metodo, args.function, args.key, args.file)
     elif args.mode.lower() == 'hash':
         claves_hash.main(args.hash, args.cifrado)
-    elif args.mode.lower() == 'encryption':
-        print('hello')
-    elif args.mode.lower() == 'pwned':
-        print('hello')
     elif args.mode.lower() == 'scan':
-        print('hello')
-    else:
-        print(
-            "¡Error! Escoge un modo valido: [pwned, scraping, hash, encryption, email, scan]")
+        port_scanning.main(args.host, args.port)
+    elif args.mode.lower() == 'api':
+        api_github.run_script(args.user, args.repo, args.token)
