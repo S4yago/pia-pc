@@ -1,25 +1,27 @@
-import argparse
 import hashlib
-import re
 from prettytable import PrettyTable
-from colored import fg, bg, attr
+from colored import fg, attr
 
 
 def menu():
     r = attr(0)
     while True:
         print("%s+-----------------------------------------+%s" % (fg(1), r))
-        print("%s|%s                 %sMENU%s                    %s|%s" % (fg(1), r, fg(30), r, fg(1), r,))
+        print("%s|%s                 %sMENU%s                    %s|%s" %
+              (fg(1), r, fg(30), r, fg(1), r,))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
-        print("%s|%s        %s1. Obtener clave hash%s            %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
-        print("%s|%s              %s2. Salir%s                   %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
+        print("%s|%s        %s1. Obtener clave hash%s            %s|%s" %
+              (fg(1), r, fg(3), r, fg(1), r))
+        print("%s|%s              %s2. Salir%s                   %s|%s" %
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         opcion = (int(input("%sElige una opción:%s " % (fg(6), r))))
         if(opcion > 2):
             print('Inválido. Ingrese de nuevo')
         if (opcion == 1):
             print("%s+-----------------------------------------+%s" % (fg(1), r))
-            print("%s|%s              %sObtener clave%s              %s|%s" % (fg(1), r, fg(3), r, fg(1), r))
+            print("%s|%s              %sObtener clave%s              %s|%s" %
+                  (fg(1), r, fg(3), r, fg(1), r))
             print("%s+-----------------------------------------+%s" % (fg(1), r))
             direccion = []
             i = 1
@@ -94,9 +96,9 @@ def menu():
             break
 
 
-def md5():
+def cifrar():
     direccion = []
-    dir = args.direccion
+    dir = arg_direccion
     direccion.append(dir)
     with open('directions.txt', 'a') as file:
         for item in direccion:
@@ -107,7 +109,7 @@ def md5():
         f = open("directions.txt", "r")
         lines = f.readlines()
         for linea in lines:
-            if args.modo == 'md5':
+            if arg_modo == 'md5':
                 md5 = hashlib.md5()
                 md5.update(byte)
                 x = PrettyTable()
@@ -119,7 +121,7 @@ def md5():
                 print(linea, 'hashing...')
                 print('Completed!')
 
-            if args.modo == 'sha256':
+            if arg_modo == 'sha256':
                 sha256 = hashlib.sha256()
                 sha256.update(byte)
                 y = PrettyTable()
@@ -131,7 +133,7 @@ def md5():
                 print(linea, 'hashing...')
                 print('Completed!')
 
-            if args.modo == 'sha512':
+            if arg_modo == 'sha512':
                 sha512 = hashlib.sha512()
                 sha512.update(byte)
                 z = PrettyTable()
@@ -143,34 +145,18 @@ def md5():
                 print(linea, 'hashing...')
                 print('Completed!')
 
-if __name__ == '__main__':
-    description = (
-        "El objetivo de este script es la obtención de claves hash" +
-        "donde podrás ingresar tus direcciones en un txt y posteriormente," +
-        "se genera un txt con las claves en el tipo de hasheo que haya" +
-        "indicado dentro del menú")
-    parser = argparse.ArgumentParser(description="PIA de Ciberseguridad",
-                                     epilog=description,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-modo',
-                        metavar='MODO',
-                        dest='modo',
-                        choices=['md5', 'sha256', 'sha512'],
-                        help="Si desea obtener la clave hash," +
-                        "es necesario especificar que tipo")
-    parser.add_argument("-direccion",
-                        metavar='DIRECCION',
-                        dest='direccion',
-                        type=str,
-                        help="Se debe poner una dirección de" +
-                        "archivo existente dentro del sistema")
-    args = parser.parse_args()
-if args.modo is None:
-    menu()
-if args.modo == 'md5':
-    md5()
-elif args.modo == 'sha256':
-    md5()
-elif args.modo == 'sha512':
-    md5()
-    
+
+def main(arg1, arg2):
+
+    global arg_modo
+    global arg_direccion
+
+    arg_modo = arg1
+    arg_direccion = arg2
+
+    if arg_modo == 'md5':
+        cifrar()
+    elif arg_modo == 'sha256':
+        cifrar()
+    elif arg_modo == 'sha512':
+        cifrar()
