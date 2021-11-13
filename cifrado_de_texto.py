@@ -1,18 +1,4 @@
-# Copyright (c) 2021
-# By ShadowFax
-
 import math
-
-# description =""" Modo de uso 😃:
-#     cifrado_de_texto.py [-l] "Idioma" -m "Metodo" -f "Funcion" [-k][Default=5] "Clave" -a "Archivo.txt"
-
-#     """
-
-# msj1 = " === Cifrado de texto, desde un archivo .txt ==="
-# msj2= "Clave para la codificación o decodificación. Default = 5"
-# parser = argparse.ArgumentParser(description=msj1,
-#                                 epilog=description,
-#                                 formatter_class=argparse.RawDescriptionHelpFormatter)
 
 UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'

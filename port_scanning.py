@@ -86,7 +86,7 @@ def menu():
               "+------------------------------------------------------+" +
               Fore.RESET)
         opcion = input("Selecciona una opcion: ")
-        os.system("cls")
+        os.system("clear")
 
         if opcion == "1":
             print(Fore.RED +
@@ -125,6 +125,8 @@ def menu():
             print("""No haz seleccionado una opcion correcta, introduce
                   la opcion que deseas del 1 al 3... \npulsa una tecla
                   para continuar""")
+            input("\n[+] Presione la tecla enter para volver al menu...")
+            os.system("clear")
 
 
 def run(arg1, arg2):

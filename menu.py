@@ -3,9 +3,7 @@ from colored import fg, attr
 import os, time, logging
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
-
 r = attr(0)
-
 
 def intro():
     import pygame
@@ -53,6 +51,7 @@ def back_to_menu():
     time.sleep(1)
     input("\n[+] Presione la tecla enter para volver al menu...")
     os.system("clear")
+
 
 def email():
     print("%s+--------------------------------------------------+%s" % (fg(1), r))
@@ -109,6 +108,24 @@ def cifrado():
     return arg_language, arg_metodo, arg_function, arg_key, arg_file
 
 
+def api():
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s‼️ Ingresa el usuario de GitHub%s          %s|%s" %
+          (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    arg_user = input("%s-->%s " % (fg(30), r))
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s‼️ Ingresa el nombre del repositorio%s           %s|%s" %
+          (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    arg_repo = input("%s-->%s " % (fg(30), r))
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s⚠️ Ingresa el token OAuth de GitHub%s     %s|%s" %
+          (fg(1), r, fg(3), r, fg(1), r))
+    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    arg_token = input("%s-->%s " % (fg(30), r))
+    return arg_user, arg_repo, arg_token
+
 
 def menu():
     _exit = False
@@ -136,7 +153,7 @@ def menu():
             (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s4. Hacer un escaneo%s            %s|%s" %
             (fg(1), r, fg(3), r, fg(1), r))
-        print("%s|%s          %s5. Infomación de repo%s          %s|%s" %
+        print("%s|%s          %s5. Información de repo%s         %s|%s" %
             (fg(1), r, fg(3), r, fg(1), r))
         print("%s|              0. Salir                   |%s" %
             (fg(1), r))
@@ -148,6 +165,7 @@ def menu():
             arg1, arg2, arg3 = email()
             try:
                 envio_de_correos.run(arg1, arg2, arg3)
+                back_to_menu()
             except Exception as e:
                 print("\n",e)
                 logger.error(e)
@@ -155,16 +173,39 @@ def menu():
         elif opt == 2:
             arg1, arg2, arg3, arg4, arg5 = cifrado()
             try:
-                cifrado.run(arg1, arg2, arg3, arg4, arg5)
+                cifrado_de_texto.run(arg1, arg2, arg3, arg4, arg5)
+                back_to_menu()
             except Exception as e:
                 print("\n",e)
                 logger.error(e)
                 back_to_menu()
-
-        # elif opt == 0:
-        #     _exit = True
+        elif opt == 3:
+            try:
+                claves_hash.menu()
+                back_to_menu()
+            except Exception as e:
+                print("\n",e)
+                logger.error(e)
+                back_to_menu()
+        elif opt == 4:
+            try:
+                port_scanning.menu()
+                back_to_menu()
+            except Exception as e:
+                print("\n",e)
+                logger.error(e)
+                back_to_menu()
+        elif opt == 5:
+            arg1, arg2, arg3 = api()
+            api_github.run(arg1, arg2, arg3)
+            print("\n[+] Se creo un archivo llamado 'data_github.txt' con la información")
+            print("[+] Si aparece información rara en la terminal, significa que algo fallo.")
+            print("[+] Por favor verifica si '{}' y '{}' estan correctos. Sí es así, entonces necesitas un token.".format(arg1, arg2))
+            back_to_menu()
+        elif opt == 0:
+            _exit = True
 
 
 def run():
-    # intro()
+    intro()
     menu()
