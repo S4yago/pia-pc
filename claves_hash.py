@@ -131,7 +131,7 @@ def cifrar():
                 print('Completed!')
 
 
-def main(arg1, arg2):
+def run(arg1, arg2):
 
     global arg_modo
     global arg_direccion
