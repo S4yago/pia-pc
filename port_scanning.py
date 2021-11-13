@@ -22,7 +22,7 @@ def connscan(tgtHost, tgtPort):
         with print_lock:
             print(Fore.WHITE + f"[{tgtPort}]" + Fore.GREEN + " Abierto")
     except:
-        print (Fore.WHITE + f"[{tgtPort}]" + Fore.RED + " Cerrado")
+        print(Fore.WHITE + f"[{tgtPort}]" + Fore.RED + " Cerrado")
     finally:
         scanner.close()
 
@@ -31,12 +31,12 @@ def portscanner(tgtHost, tgtPorts):
     try:
         tgtIP = gethostbyname(tgtHost)
     except:
-        print ("Unknown Host %s " % tgtHost)
+        print("Unknown Host %s " % tgtHost)
     try:
         tgtName = gethostbyaddr(tgtIP)
-        print ("[+] Escaneando: ") + tgtName[0]
+        print("[+] Escaneando: ") + tgtName[0]
     except:
-        print ("Resultados del escaneo a: " + tgtIP)
+        print("Resultados del escaneo a: " + tgtIP)
     for tgtPort in tgtPorts:
         t = Thread(target=connscan, args=(tgtHost, int(tgtPort)))
         t.start()
@@ -100,7 +100,7 @@ def menu():
                   Fore.RESET)
             ip = input("Ingresa la ip a escanear: ")
             tgtPorts = 0
-            print ("[+] Escaneando... ")
+            print("[+] Escaneando... ")
             with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
                 for tgtPorts in range(1000):
                     executor.submit(scan, ip, tgtPorts + 1)
@@ -138,10 +138,10 @@ def run(arg1, arg2):
         portscanner(tgtHost, tgtPorts)
     elif arg1 is not None and arg2 is None:
         tgtPorts = arg2
-        print ("[+] Escaneando... ")
+        print("[+] Escaneando... ")
         with concurrent.futures.ThreadPoolExecutor(
-                                                   max_workers=100
-                                                   ) as executor:
+            max_workers=100
+        ) as executor:
             for tgtPorts in range(1000):
                 executor.submit(scan, tgtHost, tgtPorts + 1)
     elif arg1 is None and arg2 is None:

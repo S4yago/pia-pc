@@ -1,9 +1,16 @@
-import envio_de_correos, cifrado_de_texto, claves_hash, port_scanning, api_github
+import envio_de_correos
+import cifrado_de_texto
+import claves_hash
+import port_scanning
+import api_github
 from colored import fg, attr
-import os, time, logging
+import os
+import time
+import logging
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 r = attr(0)
+
 
 def intro():
     import pygame
@@ -143,20 +150,20 @@ def menu():
     while not _exit:
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         print("%s|%s                 %sMENU%s                    %s|%s" %
-            (fg(1), r, fg(30), r, fg(1), r,))
+              (fg(1), r, fg(30), r, fg(1), r,))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         print("%s|%s          %s1. Enviar un email%s             %s|%s" %
-            (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s2. Cifrar un texto%s             %s|%s" %
-            (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s3. Sacar claves hash%s           %s|%s" %
-            (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s4. Hacer un escaneo%s            %s|%s" %
-            (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s5. Información de repo%s         %s|%s" %
-            (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s|              0. Salir                   |%s" %
-            (fg(1), r))
+              (fg(1), r))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         opt = (int(input("%sElige una opción:%s " % (fg(6), r))))
 
@@ -167,7 +174,7 @@ def menu():
                 envio_de_correos.run(arg1, arg2, arg3)
                 back_to_menu()
             except Exception as e:
-                print("\n",e)
+                print("\n", e)
                 logger.error(e)
                 back_to_menu()
         elif opt == 2:
@@ -176,7 +183,7 @@ def menu():
                 cifrado_de_texto.run(arg1, arg2, arg3, arg4, arg5)
                 back_to_menu()
             except Exception as e:
-                print("\n",e)
+                print("\n", e)
                 logger.error(e)
                 back_to_menu()
         elif opt == 3:
@@ -184,7 +191,7 @@ def menu():
                 claves_hash.menu()
                 back_to_menu()
             except Exception as e:
-                print("\n",e)
+                print("\n", e)
                 logger.error(e)
                 back_to_menu()
         elif opt == 4:
@@ -192,14 +199,16 @@ def menu():
                 port_scanning.menu()
                 back_to_menu()
             except Exception as e:
-                print("\n",e)
+                print("\n", e)
                 logger.error(e)
                 back_to_menu()
         elif opt == 5:
             arg1, arg2, arg3 = api()
             api_github.run(arg1, arg2, arg3)
-            print("\n[+] Se creo un archivo llamado 'data_github.txt' con la información")
-            print("[+] Si aparece información rara en la terminal, significa que algo fallo.")
+            print(
+                "\n[+] Se creo un archivo llamado 'data_github.txt' con la información")
+            print(
+                "[+] Si aparece información rara en la terminal, significa que algo fallo.")
             print("[+] Por favor verifica si '{}' y '{}' estan correctos. Sí es así, entonces necesitas un token.".format(arg1, arg2))
             back_to_menu()
         elif opt == 0:

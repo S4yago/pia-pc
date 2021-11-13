@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
-import envio_de_correos, cifrado_de_texto, claves_hash, port_scanning, api_github, menu
+import envio_de_correos
+import cifrado_de_texto
+import claves_hash
+import port_scanning
+import api_github
+import menu
 import argparse
 
-msj2= "clave para la codificación o decodificación. Default = 5"
+msj2 = "clave para la codificación o decodificación. Default = 5"
 parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 required = parser.add_argument_group('MODOS')
@@ -15,52 +20,54 @@ api_group = parser.add_argument_group('PARAMETROS API GITHUB')
 
 # Metodo
 required.add_argument('-m',
-                    type=str, dest="mode", choices=['email', 'encoding', 'hash', 'scan', 'api'],
-                    help='herramienta a utilizar')
+                      type=str, dest="mode", choices=['email', 'encoding', 'hash', 'scan', 'api'],
+                      help='herramienta a utilizar')
 
 # Emails
 email_group.add_argument("--email-json", dest="email_json", type=str,
-                    help="path absoluto del archivo .json")
+                         help="path absoluto del archivo .json")
 email_group.add_argument("--email-txt", dest="email_txt", type=str,
-                    help="path absoluto del archivo .txt")
+                         help="path absoluto del archivo .txt")
 email_group.add_argument("--email-file", dest="email_file", type=str,
-                    help="path absoluto del archivo a adjuntar")
+                         help="path absoluto del archivo a adjuntar")
 
 # Cifrado de Texto
 cifrado_group.add_argument("--language", dest="language", help="lenguaje a utilizar",
-                    choices=['en','es'], default="es")
+                           choices=['en', 'es'], default="es")
 cifrado_group.add_argument('--metodo-cifrado',
-                    type=str, dest="metodo", choices=['cesar', 'transposicion'],
-                    help='metodo de cifrado')
+                           type=str, dest="metodo", choices=['cesar', 'transposicion'],
+                           help='metodo de cifrado')
 cifrado_group.add_argument('--function',
-                    type=str, dest="function", choices=['encode', 'decode', 'crack'],
-                    help='funcion a realizar')
-cifrado_group.add_argument("--key", dest="key", help="clave para la codificación o decodificación. Default=5")
-cifrado_group.add_argument("--path", dest="file", help="path absoluto del archivo .txt a codificar")
+                           type=str, dest="function", choices=['encode', 'decode', 'crack'],
+                           help='funcion a realizar')
+cifrado_group.add_argument(
+    "--key", dest="key", help="clave para la codificación o decodificación. Default=5")
+cifrado_group.add_argument("--path", dest="file",
+                           help="path absoluto del archivo .txt a codificar")
 
 # Claves hash
 hash_group.add_argument('--hash',
-                    dest='hash',
-                    choices=['md5', 'sha256', 'sha512'],
-                    help="tipo de clave hash a utilizar")
+                        dest='hash',
+                        choices=['md5', 'sha256', 'sha512'],
+                        help="tipo de clave hash a utilizar")
 hash_group.add_argument("--cifrado",
-                    dest='cifrado',
-                    type=str,
-                    help="dirección de algun archivo existente en el sistema")
+                        dest='cifrado',
+                        type=str,
+                        help="dirección de algun archivo existente en el sistema")
 
 # Port Scanning
 scan_group.add_argument('--host', dest="host", type=str,
-                    help='indicar el host objetivo')
+                        help='indicar el host objetivo')
 scan_group.add_argument('--port', dest="port", type=str,
-                    help='indicar el puerto objetivo [OPCIONAL]')
+                        help='indicar el puerto objetivo [OPCIONAL]')
 
 # API GitHub
 api_group.add_argument('--user', dest="user", type=str,
-                    help='ingresar el usuario de GitHub')
+                       help='ingresar el usuario de GitHub')
 api_group.add_argument('--repository', dest="repo", type=str,
-                    help='ingresar el nombre del repositorio')
+                       help='ingresar el nombre del repositorio')
 api_group.add_argument('--token', dest="token", type=str,
-                    help='ingresar el token OAuth de GitHub')
+                       help='ingresar el token OAuth de GitHub')
 
 args = parser.parse_args()
 
@@ -70,7 +77,8 @@ if __name__ == "__main__":
     if args.mode == 'email':
         envio_de_correos.run(args.email_json, args.email_txt, args.email_file)
     elif args.mode == 'encoding':
-        cifrado_de_texto.main(args.language, args.metodo, args.function, args.key, args.file)
+        cifrado_de_texto.main(args.language, args.metodo,
+                              args.function, args.key, args.file)
     elif args.mode == 'hash':
         claves_hash.main(args.hash, args.cifrado)
     elif args.mode == 'scan':

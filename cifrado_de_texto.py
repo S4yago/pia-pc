@@ -3,11 +3,12 @@ import math
 UPPERLETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
 
+
 def loadDictionary(language='es'):
     if language == 'es':
-        dictionaryFile = open('dictEsp.txt',encoding='utf-8')
+        dictionaryFile = open('dictEsp.txt', encoding='utf-8')
     else:
-        dictionaryFile = open('dictEn.txt',encoding='utf-8')
+        dictionaryFile = open('dictEn.txt', encoding='utf-8')
     words = {}
     for word in dictionaryFile.read().split('\n'):
         word = word.upper()
@@ -22,16 +23,16 @@ def getSpanishCount(message):
 
     message = message.upper()
     message = removeNonLetters(message)
-    possibleWords = message.split() # Divide un str por cada ' '
+    possibleWords = message.split()  # Divide un str por cada ' '
 
     if possibleWords == []:
-        return 0.0 # No words at all, so return 0.0.
+        return 0.0  # No words at all, so return 0.0.
 
     matches = 0
     for word in possibleWords:
         if word in WORDS:
             matches += 1
-    return float(matches) / len(possibleWords) # El porcentaje
+    return float(matches) / len(possibleWords)  # El porcentaje
 
 
 def removeNonLetters(message):
@@ -69,9 +70,11 @@ def len_key():
 
 def decryptMessage(key, message):
 
-    numOfColumns = int(math.ceil(len(message) / float(key)))      # Numero de columnas de la matriz
+    # Numero de columnas de la matriz
+    numOfColumns = int(math.ceil(len(message) / float(key)))
     numOfRows = key        # Numero de filas de la matriz
-    numOfShadedBoxes = (numOfColumns * numOfRows) - len(message)  # Numero de casillas sin usar
+    numOfShadedBoxes = (numOfColumns * numOfRows) - \
+        len(message)  # Numero de casillas sin usar
     plaintext = [''] * numOfColumns
 
     column = 0
@@ -90,7 +93,7 @@ def decryptMessage(key, message):
 
 def cesar_decode_and_encode():
 
-    with open (arg_file) as arch:
+    with open(arg_file) as arch:
         texto = arch.read()
 
     key = len_key()
@@ -124,7 +127,7 @@ def cesar_decode_and_encode():
 
 def cesar_crack():
 
-    with open (arg_file) as arch:
+    with open(arg_file) as arch:
         texto = arch.read()
 
     SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.,_-()/\#$%&=*'
@@ -148,27 +151,28 @@ def cesar_crack():
                 translated = translated + symbol
         lista.append(translated)
 
-        #Validacion de cadenas en español
+        # Validacion de cadenas en español
         for clave in lista:
             if isSpanish(clave):
 
-                print("La posible traducción es: \n",clave)
+                print("La posible traducción es: \n", clave)
 
 
 def trans_decode():
 
-    with open (arg_file) as arch:
+    with open(arg_file) as arch:
         texto = arch.read()
 
     key = len_key()
     finaltxt = decryptMessage(key, texto)
 
-    print("El mensaje decodificado es: \n", finaltxt + '|') # Se imprime un |, para indicar el final del mensaje
+    # Se imprime un |, para indicar el final del mensaje
+    print("El mensaje decodificado es: \n", finaltxt + '|')
 
 
 def trans_encode():
 
-    with open (arg_file) as arch:
+    with open(arg_file) as arch:
         texto = arch.read()
 
     key = len_key()
@@ -188,7 +192,7 @@ def trans_encode():
 
 def trans_crack():
 
-    with open (arg_file) as arch:
+    with open(arg_file) as arch:
         message = arch.read()
 
     if message != None:
@@ -205,7 +209,8 @@ def trans_crack():
                 print('Possible encryption hack:')
                 print('Key %s: %s' % (key, decryptedText[:100]))
                 print()
-                print("NOTA: Si no estás satisfecho con el resultado... Revise la flag '-l' 😉")
+                print(
+                    "NOTA: Si no estás satisfecho con el resultado... Revise la flag '-l' 😉")
                 print('Enter D if done, anything else to continue hacking:')
                 response = input('> ')
 

@@ -9,7 +9,7 @@ def menu():
     if (opcion == 1):
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         print("%s|%s              %sObtener clave%s              %s|%s" %
-                (fg(1), r, fg(3), r, fg(1), r))
+              (fg(1), r, fg(3), r, fg(1), r))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
         direccion = []
         i = 1
@@ -29,8 +29,8 @@ def menu():
             for linea in lines:
                 print('Opciones: 1. md5,  2. sha256, 3. sha512, 4. salir')
                 hashop = (int(input
-                            ("Selecciona una de las" +
-                            "opciones para hashear: ")))
+                              ("Selecciona una de las" +
+                               "opciones para hashear: ")))
                 if (hashop > 4):
                     print('Inválido. Ingrese de nuevo')
                 if (hashop == 1):
@@ -52,8 +52,8 @@ def menu():
                     y = PrettyTable()
                     y.field_names = ["Hash", "Direccion", "Clave hash"]
                     y.add_row(["sha256",
-                                linea,
-                                "{}".format(sha256.hexdigest())])
+                               linea,
+                               "{}".format(sha256.hexdigest())])
                     f = open('resultados.txt', 'a')
                     f.write("%s\n" % str(y))
                     f.close()
@@ -67,8 +67,8 @@ def menu():
                     z = PrettyTable()
                     z.field_names = ["Hash", "Direccion", "Clave hash"]
                     z.add_row(["sha512",
-                                linea,
-                                "{}".format(sha512.hexdigest())])
+                               linea,
+                               "{}".format(sha512.hexdigest())])
                     f = open('resultados.txt', 'a')
                     f.write("%s\n" % str(z))
                     f.close()
