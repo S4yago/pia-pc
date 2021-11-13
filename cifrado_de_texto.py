@@ -6,9 +6,9 @@ LETTERS_AND_SPACE = UPPERLETTERS + UPPERLETTERS.lower() + ' \t\n'
 
 def loadDictionary(language='es'):
     if language == 'es':
-        dictionaryFile = open('dictEsp.txt', encoding='utf-8')
+        dictionaryFile = open('./dict/dictEsp.txt', encoding='utf-8')
     else:
-        dictionaryFile = open('dictEn.txt', encoding='utf-8')
+        dictionaryFile = open('./dict/dictEn.txt', encoding='utf-8')
     words = {}
     for word in dictionaryFile.read().split('\n'):
         word = word.upper()
@@ -221,7 +221,7 @@ def trans_crack():
         print('Failed to hack encryption.')
 
 
-def main(arg1, arg2, arg3, arg4, arg5):
+def run(arg1, arg2, arg3, arg4, arg5):
     global arg_language
     global arg_method
     global arg_function

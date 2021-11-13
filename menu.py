@@ -80,20 +80,20 @@ def email():
 
 
 def cifrado():
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-----------------------------------------------------------+%s" % (fg(1), r))
     print("%s|%s       %s⚠️ Ingresa el lenguaje que utilizaras (en,es)%s       %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-----------------------------------------------------------+%s" % (fg(1), r))
     arg_language = input("%s-->%s " % (fg(30), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %s‼️ Ingresa el metodo de cifrado (cesar,transposición)%s          %s|%s" %
+    print("%s+--------------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %s‼️ Ingresa el metodo de cifrado (cesar,transposición)%s        %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+--------------------------------------------------------------------+%s" % (fg(1), r))
     arg_metodo = input("%s-->%s " % (fg(30), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-------------------------------------------------------------------+%s" % (fg(1), r))
     print("%s|%s       %s‼ Ingresa la función a realizar (encode,decode,crack)%s       %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-------------------------------------------------------------------+%s" % (fg(1), r))
     arg_function = input("%s-->%s " % (fg(30), r))
 
     name = ""
@@ -102,34 +102,34 @@ def cifrado():
     elif arg_function == "decode":
         name = "decodificación"
 
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %s‼️ Ingresa la clave para la {} %s        %s|%s".format(name) %
+    print("%s+-----------------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %s⚠️ Ingresa la clave para la {} %s        %s|%s".format(name) %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-----------------------------------------------------------+%s" % (fg(1), r))
     arg_key = input("%s-->%s " % (fg(30), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %s‼️ Ingresa el path del archivo .txt a codificar %s     %s|%s" %
+    print("%s+-------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s       %s‼️ Ingresa el path del archivo .txt a codificar %s      %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+----------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s+-------------------------------------------------------------+%s" % (fg(1), r))
     arg_file = input("%s-->%s " % (fg(30), r))
     return arg_language, arg_metodo, arg_function, arg_key, arg_file
 
 
 def api():
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️ Ingresa el usuario de GitHub%s          %s|%s" %
+    print("%s+----------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s‼️ Ingresa el usuario de GitHub%s           %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    print("%s+----------------------------------------------+%s" % (fg(1), r))
     arg_user = input("%s-->%s " % (fg(30), r))
     print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️ Ingresa el nombre del repositorio%s           %s|%s" %
+    print("%s|%s    %s‼️ Ingresa el nombre del repositorio%s          %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
     print("%s+--------------------------------------------------+%s" % (fg(1), r))
     arg_repo = input("%s-->%s " % (fg(30), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s⚠️ Ingresa el token OAuth de GitHub%s     %s|%s" %
+    print("%s+---------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s⚠️ Ingresa el token OAuth de GitHub%s      %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
+    print("%s+---------------------------------------------+%s" % (fg(1), r))
     arg_token = input("%s-->%s " % (fg(30), r))
     return arg_user, arg_repo, arg_token
 
@@ -165,11 +165,13 @@ def menu():
         print("%s|              0. Salir                   |%s" %
               (fg(1), r))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
-        opt = (int(input("%sElige una opción:%s " % (fg(6), r))))
+        opt = (input("%sElige una opción:%s " % (fg(6), r)))
 
         os.system("clear")
-        if opt == 1:
+        if opt == "1":
             arg1, arg2, arg3 = email()
+            if arg3 == '':
+                arg3 = None
             try:
                 envio_de_correos.run(arg1, arg2, arg3)
                 back_to_menu()
@@ -177,8 +179,12 @@ def menu():
                 print("\n", e)
                 logger.error(e)
                 back_to_menu()
-        elif opt == 2:
+        elif opt == "2":
             arg1, arg2, arg3, arg4, arg5 = cifrado()
+            if arg1 == '':
+                arg1 = None
+            if arg4 == '':
+                arg4 = None
             try:
                 cifrado_de_texto.run(arg1, arg2, arg3, arg4, arg5)
                 back_to_menu()
@@ -186,7 +192,7 @@ def menu():
                 print("\n", e)
                 logger.error(e)
                 back_to_menu()
-        elif opt == 3:
+        elif opt == "3":
             try:
                 claves_hash.menu()
                 back_to_menu()
@@ -194,7 +200,7 @@ def menu():
                 print("\n", e)
                 logger.error(e)
                 back_to_menu()
-        elif opt == 4:
+        elif opt == "4":
             try:
                 port_scanning.menu()
                 back_to_menu()
@@ -202,8 +208,10 @@ def menu():
                 print("\n", e)
                 logger.error(e)
                 back_to_menu()
-        elif opt == 5:
+        elif opt == "5":
             arg1, arg2, arg3 = api()
+            if arg3 == '':
+                arg3 = None
             api_github.run(arg1, arg2, arg3)
             print(
                 "\n[+] Se creo un archivo llamado 'data_github.txt' con la información")
@@ -211,10 +219,13 @@ def menu():
                 "[+] Si aparece información rara en la terminal, significa que algo fallo.")
             print("[+] Por favor verifica si '{}' y '{}' estan correctos. Sí es así, entonces necesitas un token.".format(arg1, arg2))
             back_to_menu()
-        elif opt == 0:
+        elif opt == "0":
             _exit = True
+        else:
+            print("[!] Opción no valida!")
+            back_to_menu()
 
 
 def run():
-    intro()
+    # intro()
     menu()

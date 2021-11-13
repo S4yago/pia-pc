@@ -77,10 +77,10 @@ if __name__ == "__main__":
     if args.mode == 'email':
         envio_de_correos.run(args.email_json, args.email_txt, args.email_file)
     elif args.mode == 'encoding':
-        cifrado_de_texto.main(args.language, args.metodo,
-                              args.function, args.key, args.file)
+        cifrado_de_texto.run(args.language, args.metodo,
+                             args.function, args.key, args.file)
     elif args.mode == 'hash':
-        claves_hash.main(args.hash, args.cifrado)
+        claves_hash.run(args.hash, args.cifrado)
     elif args.mode == 'scan':
         port_scanning.run(args.host, args.port)
     elif args.mode == 'api':

@@ -100,7 +100,7 @@ def run(arg1, arg2, arg3):
     arg_txt = arg2
     arg_file = arg3
 
-    if arg1 and arg2 or arg3 != None:
+    if arg1 and arg2 != None:
         open_json()
         connect()
         extract_data()
