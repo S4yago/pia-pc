@@ -1,12 +1,6 @@
-#!/usr/bin/env python3
-# _*_ coding: utf-8 _*_
-# Copyright (c) 2021
-# By ShadowFax
-
 import json
 import smtplib
 import ssl
-from colored import fg, bg, attr
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -21,26 +15,6 @@ def open_json():
         global password
         user = data["user"]
         password = data["pass"]
-
-
-def menu():
-    r = attr(0)
-    print("%s+-----------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %sIngresa el path del archivo .json%s       %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+-----------------------------------------------+%s" % (fg(1), r))
-    arg_json = input("%s-->%s " % (fg(30), r))
-    print("%s+-----------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %sIngresa el path del archivo .txt%s        %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+-----------------------------------------------+%s" % (fg(1), r))
-    arg_txt = input("%s-->%s " % (fg(30), r))
-    print("%s+---------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s       %sIngresa el path del archivo a adjuntar%s      %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+---------------------------------------------------+%s" % (fg(1), r))
-    arg_file = input("%s-->%s " % (fg(30), r))
-    return arg_json, arg_txt, arg_file
 
 
 def connect():
@@ -117,7 +91,7 @@ def send_message(receiver_emails, text):
         print("\n\tCorreo enviado exitosamente, bye! uwu")
 
 
-def main(arg1, arg2, arg3):
+def run(arg1, arg2, arg3):
     global arg_json
     global arg_txt
     global arg_file
@@ -131,7 +105,4 @@ def main(arg1, arg2, arg3):
         connect()
         extract_data()
     else:
-        arg_json, arg_txt, arg_file = menu()
-        open_json(arg_json)
-        connect()
-        extract_data(arg_txt)
+        print("\n[!] Faltan argumentos")

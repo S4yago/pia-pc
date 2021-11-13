@@ -127,7 +127,7 @@ def menu():
                   para continuar""")
 
 
-def main(arg1, arg2):
+def run(arg1, arg2):
 
     tgtHost = arg1
     tgtPorts = str(arg2).split(',')
