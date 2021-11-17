@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
-import menu
 import argparse
 import os
 
-from modulos import cifrado_de_texto, claves_hash, port_scanning, web_scraping, shodan
+from modulos import cifrado_de_texto, claves_hash, port_scanning, web_scraping, shodan, menu
 
 msj2 = "clave para la codificación o decodificación. Default = 5"
 parser = argparse.ArgumentParser()
