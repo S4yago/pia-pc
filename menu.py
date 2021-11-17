@@ -1,12 +1,10 @@
-import envio_de_correos
-import cifrado_de_texto
-import claves_hash
-import port_scanning
-import api_github
-from colored import fg, attr
 import os
 import time
 import logging
+
+from colored import fg, attr
+from modulos import web_scraping, cifrado_de_texto, claves_hash, port_scanning, shodan
+
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 
 r = attr(0)
@@ -44,7 +42,7 @@ def intro():
          █████╔╝██║   ██║╚██║██║            ██║   ██║   ██║██║   ██║██║
          ╚═══██╗╚██╗ ██╔╝ ██║██║            ██║   ██║   ██║██║   ██║██║
         ██████╔╝ ╚████╔╝  ██║███████╗       ██║   ╚██████╔╝╚██████╔╝███████╗
-        ╚═════╝   ╚═══╝   ╚═╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
+        ╚═════╝   ╚═══╝   ╚═╝╚══════╝       ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝ v2.0🚀
                                 creado por:
                          👑 Angel Saúl Sáyago Leiba
                          🛐 Paulina Gómez Rodríguez
@@ -60,23 +58,13 @@ def back_to_menu():
     os.system("clear")
 
 
-def email():
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️️ Ingresa el path del archivo .json%s          %s|%s" %
+def scraping():
+    print("%s+--------------------------------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s‼️️ Ingresa el nombre del portal de noticias (larepublica,diario)%s      %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    arg_json = input("%s-->%s " % (fg(30), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️️ Ingresa el path del archivo .txt%s           %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    arg_txt = input("%s-->%s " % (fg(30), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s⚠️ Ingresa el path del archivo a adjuntar%s     %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    arg_file = input("%s-->%s " % (fg(30), r))
-    return arg_json, arg_txt, arg_file
+    print("%s+--------------------------------------------------------------------------+%s" % (fg(1), r))
+    arg_news = input("%s-->%s " % (fg(30), r))
+    return arg_news
 
 
 def cifrado():
@@ -117,21 +105,16 @@ def cifrado():
 
 def api():
     print("%s+----------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️ Ingresa el usuario de GitHub%s           %s|%s" %
+    print("%s|%s    %s⚠️️️️️ Ingresa la API KEY de Shodan%s           %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
     print("%s+----------------------------------------------+%s" % (fg(1), r))
-    arg_user = input("%s-->%s " % (fg(30), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s‼️ Ingresa el nombre del repositorio%s          %s|%s" %
+    arg_key = input("%s-->%s " % (fg(30), r))
+    print("%s+--------------------------------------------------------+%s" % (fg(1), r))
+    print("%s|%s    %s‼️ Ingresa el path del archivo con las IP's%s         %s|%s" %
           (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+--------------------------------------------------+%s" % (fg(1), r))
-    arg_repo = input("%s-->%s " % (fg(30), r))
-    print("%s+---------------------------------------------+%s" % (fg(1), r))
-    print("%s|%s    %s⚠️ Ingresa el token OAuth de GitHub%s      %s|%s" %
-          (fg(1), r, fg(3), r, fg(1), r))
-    print("%s+---------------------------------------------+%s" % (fg(1), r))
-    arg_token = input("%s-->%s " % (fg(30), r))
-    return arg_user, arg_repo, arg_token
+    print("%s+--------------------------------------------------------+%s" % (fg(1), r))
+    arg_path = input("%s-->%s " % (fg(30), r))
+    return arg_key, arg_path
 
 
 def menu():
@@ -140,10 +123,10 @@ def menu():
     logger = logging.getLogger("Error_Log")
     logger.setLevel(logging.ERROR)
     try:
-        fh = logging.FileHandler("logs/error.log")
+        fh = logging.FileHandler("./data/logs/error.log")
     except:
-        os.mkdir("logs")
-        fh = logging.FileHandler("logs/error.log")
+        os.mkdir("./data/logs")
+        fh = logging.FileHandler("./data/logs/error.log")
     fh.setLevel(logging.ERROR)
     logger.addHandler(fh)
 
@@ -152,7 +135,7 @@ def menu():
         print("%s|%s                 %sMENU%s                    %s|%s" %
               (fg(1), r, fg(30), r, fg(1), r,))
         print("%s+-----------------------------------------+%s" % (fg(1), r))
-        print("%s|%s          %s1. Enviar un email%s             %s|%s" %
+        print("%s|%s          %s1. Web Scraping   %s             %s|%s" %
               (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s2. Cifrar un texto%s             %s|%s" %
               (fg(1), r, fg(3), r, fg(1), r))
@@ -160,7 +143,7 @@ def menu():
               (fg(1), r, fg(3), r, fg(1), r))
         print("%s|%s          %s4. Hacer un escaneo%s            %s|%s" %
               (fg(1), r, fg(3), r, fg(1), r))
-        print("%s|%s          %s5. Información de repo%s         %s|%s" %
+        print("%s|%s          %s5. API Shodan         %s         %s|%s" %
               (fg(1), r, fg(3), r, fg(1), r))
         print("%s|              0. Salir                   |%s" %
               (fg(1), r))
@@ -169,11 +152,8 @@ def menu():
 
         os.system("clear")
         if opt == "1":
-            arg1, arg2, arg3 = email()
-            if arg3 == '':
-                arg3 = None
             try:
-                envio_de_correos.run(arg1, arg2, arg3)
+                web_scraping.run(scraping())
                 back_to_menu()
             except Exception as e:
                 print("\n", e)
@@ -209,16 +189,14 @@ def menu():
                 logger.error(e)
                 back_to_menu()
         elif opt == "5":
-            arg1, arg2, arg3 = api()
-            if arg3 == '':
-                arg3 = None
-            api_github.run(arg1, arg2, arg3)
-            print(
-                "\n[+] Se creo un archivo llamado 'data_github.txt' con la información")
-            print(
-                "[+] Si aparece información rara en la terminal, significa que algo fallo.")
-            print("[+] Por favor verifica si '{}' y '{}' estan correctos. Sí es así, entonces necesitas un token.".format(arg1, arg2))
-            back_to_menu()
+            arg1, arg2 = api()
+            try:
+                shodan.run(arg1, arg2)
+                back_to_menu()
+            except Exception as e:
+                print("\n", e)
+                logger.error(e)
+                back_to_menu()
         elif opt == "0":
             _exit = True
         else:
@@ -227,5 +205,5 @@ def menu():
 
 
 def run():
-    # intro()
+    intro()
     menu()

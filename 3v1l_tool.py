@@ -1,35 +1,29 @@
 #!/usr/bin/env python3
 
-import envio_de_correos
-import cifrado_de_texto
-import claves_hash
-import port_scanning
-import api_github
 import menu
 import argparse
+import os
+
+from modulos import cifrado_de_texto, claves_hash, port_scanning, web_scraping, shodan
 
 msj2 = "clave para la codificación o decodificación. Default = 5"
 parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 required = parser.add_argument_group('MODOS')
-email_group = parser.add_argument_group('PARAMETROS EMAIL')
+scraping_group = parser.add_argument_group('PARAMETROS WEB SCRAPING')
 cifrado_group = parser.add_argument_group('PARAMETROS CIFRADO')
 hash_group = parser.add_argument_group('PARAMETROS HASH')
 scan_group = parser.add_argument_group('PARAMETROS PORT SCANNING')
-api_group = parser.add_argument_group('PARAMETROS API GITHUB')
+api_group = parser.add_argument_group('PARAMETROS API SHODAN')
 
 # Metodo
 required.add_argument('-m',
-                      type=str, dest="mode", choices=['email', 'encoding', 'hash', 'scan', 'api'],
+                      type=str, dest="mode", choices=['scraping', 'encoding', 'hash', 'scan', 'api'],
                       help='herramienta a utilizar')
 
-# Emails
-email_group.add_argument("--email-json", dest="email_json", type=str,
-                         help="path absoluto del archivo .json")
-email_group.add_argument("--email-txt", dest="email_txt", type=str,
-                         help="path absoluto del archivo .txt")
-email_group.add_argument("--email-file", dest="email_file", type=str,
-                         help="path absoluto del archivo a adjuntar")
+# Web Scraping
+scraping_group.add_argument("--news", dest="news", type=str, choices=['larepublica', 'diario'],
+                         help="ingrese el nombre del portal de noticias")
 
 # Cifrado de Texto
 cifrado_group.add_argument("--language", dest="language", help="lenguaje a utilizar",
@@ -61,21 +55,22 @@ scan_group.add_argument('--host', dest="host", type=str,
 scan_group.add_argument('--port', dest="port", type=str,
                         help='indicar el puerto objetivo [OPCIONAL]')
 
-# API GitHub
-api_group.add_argument('--user', dest="user", type=str,
-                       help='ingresar el usuario de GitHub')
-api_group.add_argument('--repository', dest="repo", type=str,
-                       help='ingresar el nombre del repositorio')
-api_group.add_argument('--token', dest="token", type=str,
-                       help='ingresar el token OAuth de GitHub')
+# API Shodan
+api_group.add_argument('--api-key', dest="api_key", type=str, default="8Mpsy8tdQBzdGedUlHmY0dUxKZgxqujp",
+                       help='ingresar la API_KEY de Shodan (Por default ya viene una incluida)')
+api_group.add_argument('--shodan-path', dest="path", type=str,
+                       help="ingresar el path del archivo con las IP's a analizar")
 
 args = parser.parse_args()
 
 
 if __name__ == "__main__":
 
-    if args.mode == 'email':
-        envio_de_correos.run(args.email_json, args.email_txt, args.email_file)
+    if not os.path.exists("./data/"):
+        os.mkdir("./data/")
+
+    if args.mode == 'scraping':
+        web_scraping.run(args.news)
     elif args.mode == 'encoding':
         cifrado_de_texto.run(args.language, args.metodo,
                              args.function, args.key, args.file)
@@ -84,6 +79,6 @@ if __name__ == "__main__":
     elif args.mode == 'scan':
         port_scanning.run(args.host, args.port)
     elif args.mode == 'api':
-        api_github.run(args.user, args.repo, args.token)
+        shodan.run(args.api_key, args.path)
     elif args.mode == None:
         menu.run()

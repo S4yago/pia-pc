@@ -39,7 +39,7 @@ def menu():
                     x = PrettyTable()
                     x.field_names = ["Hash", "Direccion", "Clave hash"]
                     x.add_row(["md5", linea, "{}".format(md5.hexdigest())])
-                    f = open('resultados.txt', 'a')
+                    f = open('./data/resultados-hash.txt', 'a')
                     f.write("%s\n" % str(x))
                     f.close()
                     global clave1
@@ -54,7 +54,7 @@ def menu():
                     y.add_row(["sha256",
                                linea,
                                "{}".format(sha256.hexdigest())])
-                    f = open('resultados.txt', 'a')
+                    f = open('./data/resultados-hash.txt', 'a')
                     f.write("%s\n" % str(y))
                     f.close()
                     global clave2
@@ -69,7 +69,7 @@ def menu():
                     z.add_row(["sha512",
                                linea,
                                "{}".format(sha512.hexdigest())])
-                    f = open('resultados.txt', 'a')
+                    f = open('./data/resultados-hash.txt', 'a')
                     f.write("%s\n" % str(z))
                     f.close()
                     global clave3
@@ -85,9 +85,9 @@ def cifrar():
     direccion = []
     dir = arg_direccion
     direccion.append(dir)
-    with open('directions.txt', 'a') as file:
-        for item in direccion:
-            file.write("%s\n" % item)
+    # with open('directions.txt', 'a') as file:
+    #     for item in direccion:
+    #         file.write("%s\n" % item)
 
     with open('directions.txt', 'rb') as fr:
         byte = fr.read()
@@ -100,7 +100,7 @@ def cifrar():
                 x = PrettyTable()
                 x.field_names = ["Hash", "File", "Clave hash"]
                 x.add_row(["md5", linea, "{}".format(md5.hexdigest())])
-                f = open('results-md5.txt', 'a')
+                f = open('./data/results-md5.txt', 'a')
                 f.write("%s\n" % str(x))
                 f.close()
                 print(linea, 'hashing...')
@@ -112,7 +112,7 @@ def cifrar():
                 y = PrettyTable()
                 y.field_names = ["Hash", "File", "Clave hash"]
                 y.add_row(["sha256", linea, "{}".format(sha256.hexdigest())])
-                f = open('results-sha256.txt', 'a')
+                f = open('./data/results-sha256.txt', 'a')
                 f.write("%s\n" % str(y))
                 f.close()
                 print(linea, 'hashing...')
@@ -124,7 +124,7 @@ def cifrar():
                 z = PrettyTable()
                 z.field_names = ["Hash", "File", "Clave hash"]
                 z.add_row(["sha512", linea, "{}".format(sha512.hexdigest())])
-                f = open('results-sha512.txt', 'a')
+                f = open('./data/results-sha512.txt', 'a')
                 f.write("%s\n" % str(z))
                 f.close()
                 print(linea, 'hashing...')
