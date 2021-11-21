@@ -2,11 +2,11 @@
 
 **_3V1L TOOL_** es un programa exclusivo de linux que contiene herramientas para realizar tareas con relación a ciberseguridad.
 Entre ellas están:
-* [Envio de correos](https://github.com/S4yago/pia-pc/blob/main/envio_de_correos.py)
-* [Consulta a la API de GitHub](https://github.com/S4yago/pia-pc/blob/main/api_github.py)
-* [Escaneo de puertos](https://github.com/S4yago/pia-pc/blob/main/port_scanning.py)
-* [Obtención de claves HASH](https://github.com/S4yago/pia-pc/blob/main/claves_hash.py)
-* [Cifrado de texto](https://github.com/S4yago/pia-pc/blob/main/cifrado_de_texto.py)
+* [Web Scraping](https://github.com/S4yago/pia-pc/blob/main/modulos/web_scraping.py)
+* [Consulta a la API de Shodan](https://github.com/S4yago/pia-pc/blob/main/modulos/shodan.py)
+* [Escaneo de puertos](https://github.com/S4yago/pia-pc/blob/main/modulos/port_scanning.py)
+* [Obtención de claves HASH](https://github.com/S4yago/pia-pc/blob/main/modulos/claves_hash.py)
+* [Cifrado de texto](https://github.com/S4yago/pia-pc/blob/main/modulos/cifrado_de_texto.py)
 
 
 ## Contenido
