@@ -1,0 +1,13 @@
+[+] Dirección: 8.8.8.8
+[+] Pais: US
+[+] Ciudad: Mountain View
+[+] ISP: Google LLC
+[+] Organización: Google LLC
+[+] Puertos: [
+  53
+]
+
+EL RESTO DE LA INFORMACIÓN EN FORMATO JSON
+
+ {"region_code": "CA", "tags": [], "ip": 134744072, "area_code": null, "domains": ["dns.google"], "hostnames": ["dns.google"], "postal_code": null, "country_code": "US", "org": "Google LLC", "data": [{"hash": -553166942, "timestamp": "2021-11-23T00:05:40.566321", "isp": "Google LLC", "transport": "udp", "data": "
+Recursion: enabled", "asn": "AS15169", "port": 53, "hostnames": ["dns.google"], "location": {"city": "Mountain View", "region_code": "CA", "area_code": null, "longitude": -122.0775, "latitude": 37.4056, "postal_code": null, "country_code": "US", "country_name": "United States"}, "dns": {"resolver_hostname": null, "recursive": true, "resolver_id": null, "software": null}, "ip": 134744072, "domains": ["dns.google"], "org": "Google LLC", "os": null, "_shodan": {"crawler": "49217c0cdcbcebaf23c2979ae16d4eba64180b1f", "options": {}, "id": "f24cc61d-909c-4052-8063-45a051f382b0", "module": "dns-udp", "ptr": true}, "opts": {"raw": "34ef818200010000000000000776657273696f6e0462696e640000100003"}, "ip_str": "8.8.8.8"}], "asn": "AS15169", "city": "Mountain View", "latitude": 37.4056, "isp": "Google LLC", "longitude": -122.0775, "last_update": "2021-11-23T00:05:40.566321", "country_name": "United States", "ip_str": "8.8.8.8", "os": null, "ports": [53]}

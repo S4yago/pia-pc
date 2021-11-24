@@ -25,7 +25,7 @@ scraping_group.add_argument("--news", dest="news", type=str, choices=['larepubli
                          help="ingrese el nombre del portal de noticias")
 
 # Cifrado de Texto
-cifrado_group.add_argument("--language", dest="language", help="lenguaje a utilizar",
+cifrado_group.add_argument("--language", dest="language", help="lenguaje a utilizar. [OPCIONAL] Default=es",
                            choices=['en', 'es'], default="es")
 cifrado_group.add_argument('--metodo-cifrado',
                            type=str, dest="metodo", choices=['cesar', 'transposicion'],
@@ -34,7 +34,7 @@ cifrado_group.add_argument('--function',
                            type=str, dest="function", choices=['encode', 'decode', 'crack'],
                            help='funcion a realizar')
 cifrado_group.add_argument(
-    "--key", dest="key", help="clave para la codificación o decodificación. Default=5")
+    "--key", dest="key", help="clave para la codificación o decodificación. [OPCIONAL] Default=5")
 cifrado_group.add_argument("--path", dest="file",
                            help="path absoluto del archivo .txt a codificar")
 
